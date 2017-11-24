@@ -1,0 +1,66 @@
+.container-fluid {
+  margin-top: 10px;
+}
+
+.hdfs-list {
+  margin-top: 10px;
+}
+
+select.ue-form {
+  min-width: 150px;
+}
+
+#button-group button + button {
+  margin-left: 5px;
+}
+
+table.table-bordered.dataTable {
+  border-collapse: collapse !important;
+}
+
+table.table tbody tr td {
+  border: solid 1px #ddd;
+  vertical-align: middle;
+  color: #333;
+  font-family: SimSun;
+}
+
+table.dataTable thead {
+  border-bottom: solid 2px #ddd;
+}
+
+table.dataTable thead>tr>th {
+  height: 50px;
+  line-height: 50px;
+  background: #fafafa;
+}
+
+table.table tbody tr {
+  background: #fff !important;
+}
+
+.category {
+  line-height: 20px;
+}
+
+.category:first-child {
+  margin-top: 5px;
+}
+
+.category:last-child {
+  margin-bottom: 5px;
+}
+
+.rule {
+  height: 28px;
+  line-height: 28px;
+  margin: 5px 10px;
+  border: solid 1px #ddd;
+  background: #f1f1f1;
+  text-align: left;
+  padding: 0px 5px;
+}
+
+.link + .link {
+  margin-left: 10px;
+}

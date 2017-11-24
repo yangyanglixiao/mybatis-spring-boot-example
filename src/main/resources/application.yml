@@ -1,0 +1,53 @@
+server:
+    port: 9090
+#    context-path: /demo/
+
+logging:
+    level:
+        com.inspur: TRACE
+    
+spring:
+    mvc:
+        view:
+            prefix: /templates/
+            suffix: .html
+    thymeleaf:
+        cache: false
+    jpa:
+        show-sql: true
+        hibernate:
+                 naming:
+                        strategy: ImprovedNamingStrategy
+#    freemarker:
+#        cache: false
+#        request-context-attribute: request
+    datasource:
+        driverClassName : com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/day
+        username: root
+        password: 123
+        min-idle: 1
+        max-active: 20
+        test-on-borrow: true
+
+mybatis:
+    type-aliases-package: com.inspur.springboot.model
+    mapper-locations: classpath:mapper/*.xml
+    #mapper-locations: classpath:com.inspur.springboot.mapper/*.xml
+
+mapper:
+    mappers:
+        - com.inspur.springboot.util.MyMapper
+    not-empty: false
+    identity: MYSQL
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+#user:
+#    productName: inspur
+#    productDate: 10
+#    productHeight: abc
+#    productWidth: 10133

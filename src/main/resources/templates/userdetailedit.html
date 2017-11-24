@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>用户修改</title>
+<!-- 引入css文件 -->
+
+
+ <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css"/>
+ <link th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css"/>
+ <link th:href="@{/css/ui.css}" rel="stylesheet" type="text/css"/>
+ <link th:href="@{/css/form.css}" rel="stylesheet" type="text/css"/>
+ <link th:href="@{/css/user.css}" rel="stylesheet" type="text/css"/>
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+  <script src="<l:asset path='html5shiv.js'/>"></script>
+  <script src="<l:asset path='respond.js'/>"></script>
+<![endif]-->
+
+<!-- 引入js文件 -->
+
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/bootstrap.js}"></script>
+<script th:src="@{/js/form.js}"></script>
+<script th:src="@{/js/jquery.form.js}"></script>
+<script th:src="@{/js/ui.js}"></script>
+<script th:src="@{/js/framework/demo/user/userdetailedit.js}"></script>
+</head>
+<body>
+	<div class="container" id="sandbox-container">
+	  <h2 class="text-left htext">编辑用户</h2>
+	  <hr class="fenge"/>
+	  <br/>
+	  <div class="col-xs-10 col-md-10">	  
+		<form class="form-horizontal" id="saveForm" name="saveForm" onsubmit="return false" enctype="multipart/form-data">
+			<input type="hidden" th:value="${user} == null ? ' ' : ${user.id}" name="id"/>
+			
+		<!--  	<div class="form-group">
+				<label class="col-xs-3 col-md-3 control-label"><spring:message code="useredit.image" text="头像图片"></spring:message><span class="required">*</span></label>
+				<div class="col-xs-8 col-md-8">
+					<img id="pic">
+					<input type="text" class="ue-form" id="filePath" style="display:none" value="" />		
+					<span class="Validform_checktip Validform_span"></span>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-xs-3 col-md-3 control-label"><spring:message code="useredit.userimage" text="用户头像"></spring:message><span class="required"></span></label>
+				<div class="col-xs-8 col-md-8">
+					<input type="file" class="Validform_input" id="icon"
+						name="icon" value="" style="display: none" nullmsg="<spring:message code="useredittips.selectavatar" text="请选择头像"></spring:message>" />
+					<button type="button"  id="uploadIcon"
+						class="btn ue-btn"><spring:message code="useredit.selectavatar" text="选择头像"></spring:message></button>
+					<button type="button" name="downloadIcon"  id="downloadIcon"
+						class="btn ue-btn"><spring:message code="useredit.downloadavatar" text="下载头像"></spring:message></button>						
+					<span class="Validform_checktip Validform_span"></span>
+				</div>
+			</div>  -->
+			
+			<div class="form-group">
+				<label class="col-xs-3 col-md-3 control-label">账号<span class="required">*</span></label>
+				<div class="col-xs-8 col-md-8">
+					<input type="text" class="form-control ue-form Validform_input" id="userId"
+						name="user_id" th:value="${user} == null ? ' ' : ${user.user_id}" 
+						placeholder="账号" datatype="s3-16" errormsg="姓名3~16个字符！" nullmsg="请设置账号" />						
+					<span class="Validform_checktip Validform_span"></span>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-xs-3 col-md-3 control-label">名称<span class="required">*</span></label>
+				<div class="col-xs-8 col-md-8">
+					<input type="text" class="form-control ue-form Validform_input" id="userName"
+						name="user_name" th:value="${user} == null ? ' ' : ${user.user_name}" placeholder="名称" datatype="s2-16" errormsg="姓名2~16个字符！" nullmsg="请填写名称"/>						
+					<span class="Validform_checktip Validform_span"></span>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-xs-3 col-md-3 control-label">昵称</label>
+				<div class="col-xs-8 col-md-8">
+					<input type="text" class="form-control ue-form Validform_input" id="nickname"
+						name="nickname" th:value="${user} == null ? ' ' : ${user.nickname}"
+						placeholder="昵称" datatype="s2-16" errormsg="昵称2~16个字符！" ignore="ignore" />
+					<div class="Validform_checktip Validform_span"></div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-xs-3 col-md-3 control-label">密码<span class="required">*</span></label>
+				<div class="col-xs-8 col-md-8">
+					<input type="text" class="form-control ue-form Validform_input" id="password"
+						name="password" th:value="${user} == null ? ' ' : ${user.password}" 
+						placeholder="密码" datatype="s6-16" errormsg="密码6~16个字符！" nullmsg="请设置密码" />						
+					<span class="Validform_checktip Validform_span"></span>
+				</div>
+			</div>
+
+			<!--  <div class="form-group">
+				<label class="col-xs-3 col-md-3 control-label"><spring:message code="user.status" text="账号状态"></spring:message><span class="required">*</span></label>
+				<div class="col-xs-8 col-md-8">
+					<l:enum name="status" id="status" enumKey="USER.STATUS" currentVal="${user.status}" render="select" classes="form-control input-sm ue-form Validform_input" datatype="s" nullmsg="<spring:message code='useredittips.statusnullmsg' text='请设置账号状态'/>"></l:enum>
+				</div>
+			</div>  -->
+			
+			<div class="form-group">
+				<label class="col-xs-3 col-md-3 control-label">性别<span class="required">*</span></label>
+				<div class="col-xs-9 col-md-9">
+					<div class="radio" id="gender">
+						<label>
+							<input type="radio" name="archive.gender" id="gender1" value="M" checked="checked" />男
+						</label>
+						<label>
+							<input type="radio" name="archive.gender" id="gender2" value="F" />女
+						</label>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-xs-3 col-md-3 control-label">生日</label>
+				<div class="col-xs-8 col-md-8">
+					<div class="input-group date Validform_input">
+						<input type="text" class="form-control ue-form" id="birthday" name="archive.birthday" 
+							th:value="${user} ==null ? ' ' : ${user.archive.birthday}" placeholder="生日" datatype="*" ignore="ignore"/><span class="input-group-addon ue-form-btn date-input-btn"><i
+							class="fa fa-calendar"></i></span>										   
+					</div>
+					<span class="Validform_checktip Validform_span" ></span>	
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-xs-3 col-md-3 control-label">学历</label>
+				<div class="col-xs-9 col-md-9">
+					<div class="radio" id="educations">
+						<label>
+							<input type="radio" name="archive.education" id="education1" value="0" checked="checked" />本科
+						</label>
+						<label>
+							<input type="radio" name="archive.education" id="education2" value="1" />硕士
+						</label>
+						<label>
+							<input type="radio" name="archive.education" id="education3" value="2" />博士
+						</label>
+					</div>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-xs-3 col-md-3 control-label">学校</label>
+				<div class="col-xs-8 col-md-8">
+					<input type="text" class="form-control ue-form Validform_input" id="school"
+						name="archive.school" th:value="${user} == null ? ' ' : ${user.archive.school}"
+						placeholder="学校" datatype="s" ignore="ignore"/>
+					<span class="Validform_checktip Validform_span"></span>					
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-xs-3 col-md-3 control-label">电子邮件</label>
+				<div class="col-xs-8 col-md-8">
+					<input type="text" class="form-control ue-form Validform_input" id="email"
+						name="archive.email" th:value="${user} == null ? ' ' : ${user.archive.email}"
+						placeholder="邮件地址" datatype="email" ignore="ignore" errormsg="请填写正确的邮箱地址"/>				    
+					<span class="Validform_checktip Validform_span" ></span>
+				</div>			
+			</div>
+			
+			<div class="form-group" >
+			  <label class="col-xs-3 col-md-3 control-label"></label>
+			  <div class="col-xs-8 col-md-8">
+				<button type="button" class="btn ue-btn-primary" id="saveBtn" >
+					保存
+				</button>
+				<button type="button" class="btn ue-btn" id="returnBtn">
+					 返回
+				</button>
+				<span id="msgdemo"></span>
+			</div>
+		  </div>
+		</form>
+		</div>
+	</div>
+</body>
+</html>
